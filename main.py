@@ -44,7 +44,7 @@ def main():
         table = bigquery.Table(table_id, schema=UserSchema.schema)
         table_id = client.create_table(table)
 
-    users = fetch_json()
+    users = fetch_json(config.user_json_source_url)
     errors = client.insert_rows_json(table_id, users)
     if errors:
         print(f"Encountered errors while inserting rows: {errors}")
